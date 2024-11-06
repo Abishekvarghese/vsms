@@ -1,0 +1,98 @@
+body{
+    background-image: url("background image for a vehicle service management system.png");
+    background-size: cover;
+}
+h1 {
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+h3{
+    text-align: center;
+}
+.Header{
+   border: 2px solid whitesmoke !important;
+   border-radius: 2rem !important;
+   background-color: rgba(255, 255, 255, 0.5);
+}
+.sec1{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2rem !important;
+    border: 2px solid whitesmoke !important;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+}
+.sec2{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2rem !important;
+    border: 2px solid whitesmoke !important;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+}
+.submit{
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+}
+.search{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2rem !important;
+    border: 2px solid whitesmoke !important;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+}
+.result{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2rem !important;
+    border: 2px solid whitesmoke !important;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+@media (max-width: 768px) {
+    /* Header */
+    .Header {
+      width: 90%;
+      margin: 20px auto;
+    }
+  
+    /* Sections */
+    .sec1{
+      width: 70%;
+      margin: 20px auto;
+    }
+    .sec2{
+        width: 60%;
+      margin: 20px auto;
+    }
+    .search{
+        width: 50%;
+        margin: 20px auto;
+    }
+    /* Input Fields */
+    .input input {
+      width: 100%;
+    }
+  
+    /* Submit Button */
+    .submit button {
+      width: 100%;
+    }
+  }

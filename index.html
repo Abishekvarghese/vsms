@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="vsms.css">
+    <title>VSMS</title>
+</head>
+<body>
+    <div class="Header">
+        <h1>VSMS</h1>
+        <h2>Vehicle Service Management System</h2>
+        <h3>The Vehicle Service Management System (VSMS) is a software solution designed to simplify the management of vehicle services at service centers.</h3>
+    </div>
+    <form id="vsmsForm">
+        <div class="sec1">
+            <h1>Customer Details</h1>
+            <div class="input">
+                <input type="text" id="customerName" placeholder="Customer Name" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px;">
+                <br>
+                <input type="text" id="customerID" placeholder="Customer ID" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">
+                <br>
+                <input type="text" id="phone" placeholder="Phone" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">
+                <br>
+                <input type="text" id="email" placeholder="Email" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">
+                <br>
+                <input type="text" id="customeradd" placeholder="Customer Address" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">
+            </div>
+        </div>
+        <div class="sec2">
+            <h1>Vehicle Details</h1>
+            <div class="input">
+                <input type="text" id="vehicleowner" placeholder="Vehicle Owner Name" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px;">
+                <br>
+                <input type="text" id="vehiclemodel" placeholder="Vehicle Model" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">
+                <br>
+                <input type="text" id="vehicleregistration" placeholder="Vehicle Registration Number" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">
+                <br>
+                <input type="text" id="vehicleservicestype" placeholder="Vehicle Service Type" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px" oninput="updatePrice()">
+            </div>
+        </div>
+        <div class="submit">
+            <button type="button" id="submit" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">Submit</button>
+        </div>
+    </form>
+
+    <div class="search">
+        <h2>Search Customer Data</h2>
+        <input type="text" id="searchCustomerID" placeholder="Enter Customer ID" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px;">
+        <button type="button" id="searchButton" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; margin-top: 10px">Search</button>
+    </div>
+
+    <div id="displaySection" class="result">
+        <h2>Search Results</h2>
+        <p><strong>Customer Name:</strong> <span id="displayCustomerName"></span></p>
+        <p><strong>Customer ID:</strong> <span id="displayCustomerID"></span></p>
+        <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+        <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+        <p><strong>Customer Address:</strong> <span id="displayCustomerAdd"></span></p>
+        <p><strong>Vehicle Owner:</strong> <span id="displayVehicleOwner"></span></p>
+        <p><strong>Vehicle Model:</strong> <span id="displayVehicleModel"></span></p>
+        <p><strong>Vehicle Registration Number:</strong> <span id="displayVehicleRegistration"></span></p>
+        <p><strong>Vehicle Service Type:</strong> <span id="displayVehicleServiceType"></span></p>
+        <p><strong>Service Price:</strong> <span id="displayPrice"></span></p>
+    </div>
+
+    <script>
+        // Function to store form data in localStorage
+        function storeData() {
+            const customerID = document.getElementById('customerID').value;
+            if (!customerID) {
+                alert("Please enter a Customer ID to save the data.");
+                return;
+            }
+
+            const customerData = {
+                customerName: document.getElementById('customerName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                customeradd: document.getElementById('customeradd').value,
+                vehicleowner: document.getElementById('vehicleowner').value,
+                vehiclemodel: document.getElementById('vehiclemodel').value,
+                vehicleregistration: document.getElementById('vehicleregistration').value,
+                vehicleservicestype: document.getElementById('vehicleservicestype').value,
+                price: document.getElementById('displayPrice').textContent
+            };
+            localStorage.setItem(customerID, JSON.stringify(customerData));
+            alert("Data has been saved!");
+        }
+
+        // Function to search for customer data by customer ID and display it
+        function searchCustomerData() {
+            const searchID = document.getElementById('searchCustomerID').value;
+            if (!searchID) {
+                alert("Please enter a Customer ID to search.");
+                return;
+            }
+
+            const storedData = JSON.parse(localStorage.getItem(searchID));
+            if (storedData) {
+                // Populate the form fields
+                document.getElementById('customerName').value = storedData.customerName;
+                document.getElementById('phone').value = storedData.phone;
+                document.getElementById('email').value = storedData.email;
+                document.getElementById('customeradd').value = storedData.customeradd;
+                document.getElementById('vehicleowner').value = storedData.vehicleowner;
+                document.getElementById('vehiclemodel').value = storedData.vehiclemodel;
+                document.getElementById('vehicleregistration').value = storedData.vehicleregistration;
+                document.getElementById('vehicleservicestype').value = storedData.vehicleservicestype;
+                document.getElementById('customerID').value = searchID;
+
+                // Populate the price
+                document.getElementById('displayPrice').textContent = storedData.price;
+
+                // Display the search results in the display section
+                document.getElementById('displayCustomerName').textContent = storedData.customerName;
+                document.getElementById('displayCustomerID').textContent = searchID;
+                document.getElementById('displayPhone').textContent = storedData.phone;
+                document.getElementById('displayEmail').textContent = storedData.email;
+                document.getElementById('displayCustomerAdd').textContent = storedData.customeradd;
+                document.getElementById('displayVehicleOwner').textContent = storedData.vehicleowner;
+                document.getElementById('displayVehicleModel').textContent = storedData.vehiclemodel;
+                document.getElementById('displayVehicleRegistration').textContent = storedData.vehicleregistration;
+                document.getElementById('displayVehicleServiceType').textContent = storedData.vehicleservicestype;
+
+                // Show the display section
+                document.getElementById('displaySection').style.display = 'block';
+                alert("Data retrieved successfully!");
+            } else {
+                alert("No data found for the entered Customer ID.");
+            }
+        }
+
+        // Function to update price based on service type
+        function updatePrice() {
+            const serviceType = document.getElementById('vehicleservicestype').value.toLowerCase();
+            let price = 0;
+            if (serviceType === "tyre change") {
+                price = 500;
+            }
+            document.getElementById('displayPrice').textContent = price ? price : "Not available";
+        }
+
+        // Event listener to save data on button click
+        document.getElementById('submit').addEventListener('click',storeData);
+        document.getElementById('searchButton').addEventListener('click',searchCustomerData);
+        </script>
+</body>
+</html>
